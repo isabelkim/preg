@@ -1,0 +1,12 @@
+black
+isort
+flask
+Flask-CORS
+pytest
+
+
+
+Flask-Login
+Flask-Admin
+Flask-WTF
+Flask-SQLAlchemy
