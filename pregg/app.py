@@ -1,6 +1,7 @@
 import sqlite3
 import os
 
+from cs50 import SQL
 from flask import Flask, jsonify, render_template, request, session, flash, redirect
 from flask_session import Session
 from tempfile import mkdtemp
@@ -21,17 +22,21 @@ app.config.from_object(Config)
 # DATABASE
 
 # Connect database (create a Connection object that represents the database)
-con = sqlite3.connect('app.db')
+# con = sqlite3.connect('app.db')
+
+# Database using CS50
+db = SQL("sqlite:///app.db")
 
 # Create datatables
 # https://docs.python.org/3/library/sqlite3.html
-con.execute('''CREATE TABLE IF NOT EXISTS users (id INTEGER, username TEXT, hash TEXT, PRIMARY KEY(id))''')
+# con.execute('''CREATE TABLE IF NOT EXISTS users (id INTEGER, username TEXT, hash TEXT, PRIMARY KEY(id))''')
+db.execute('''CREATE TABLE IF NOT EXISTS users (id INTEGER, username TEXT, hash TEXT, PRIMARY KEY(id))''')
 
 # Initialize cursor 
 # cur = con.cursor()
 
 # Save (commit) the changes
-con.commit()
+# con.commit()
 
 
 @app.route("/", methods=["GET", 'POST'])
@@ -83,7 +88,8 @@ def login():
             # return apology("must provide password", 403)
 
         # Query database for username
-        rows = con.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
+        # rows = con.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
+        rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
 
         # Ensure username exists and password is correct
         if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
@@ -126,7 +132,8 @@ def register():
             # return apology("must provide both password and confirmation", 400)
 
         # Query database for username
-        rows = con.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
+        # rows = con.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
+        rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
 
         # Ensure user submitted a username that does not already exist
         if len(rows) == 1:
@@ -143,7 +150,8 @@ def register():
         passwordhash = generate_password_hash(request.form.get("password"))
 
         # Insert user input into database
-        con.execute("INSERT into users (username, hash) VALUES (?, ?)", username, passwordhash)
+        # con.execute("INSERT into users (username, hash) VALUES (?, ?)", username, passwordhash)
+        db.execute("INSERT into users (username, hash) VALUES (?, ?)", username, passwordhash)
 
         # Redirect user to homepage
         return redirect("/")
