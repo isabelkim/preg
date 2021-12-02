@@ -6,20 +6,20 @@ help :
 ### install - install requirements in venv
 .PHONY: install
 install:
-	python3 -m venv .env; \
-	. .env/bin/activate; \
+	python3 -m venv .venv; \
+	. .venv/bin/activate; \
 	pip install -r requirements.txt
 
 ### start - start flask dev server
 .PHONY: start
 start:
-	. .env/bin/activate; \
-	python app.py
+	. .venv/bin/activate; \
+	flask run
 
 ### test - test python code
 .PHONY: test
 test:
-	. .env/bin/activate; \
+	. .venv/bin/activate; \
 	tox
 
 ### lint - lint code
