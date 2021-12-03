@@ -22,17 +22,17 @@ app.config.from_object(Config)
 # DATABASE
 
 # Connect database (create a Connection object that represents the database)
-con = sqlite3.connect('app.db')
+# con = sqlite3.connect('app.db')
 
 # Create datatables
 # https://docs.python.org/3/library/sqlite3.html
-con.execute("CREATE TABLE IF NOT EXISTS users (id INTEGER, username TEXT, hash TEXT, PRIMARY KEY(id))")
+# db.execute("CREATE TABLE IF NOT EXISTS users (id INTEGER, username TEXT, hash TEXT, PRIMARY KEY(id))")
 
 # Initialize cursor 
 # cur = con.cursor()
 
 # Save (commit) the changes
-con.commit()
+# con.commit()
 
 
 @app.route("/", methods=["GET", 'POST'])
@@ -156,8 +156,11 @@ def register():
 @app.route("/journal")
 @login_required
 def journal():
-    """Journal page for users"""
-    return render_template("journal.html")
+    """Show history of journal entries"""
+    journal = db.execute("SELECT * FROM journal WHERE user_id = ?", session["user_id"])
+    return render_template("journal.html", journal=journal)
+    # history = db.execute("SELECT * FROM purchases WHERE user_id = ?", session["user_id"])
+    # return render_template("history.html", history=history)
 
 @app.route("/quiz")
 @login_required
