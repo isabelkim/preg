@@ -4,6 +4,26 @@
    Journal
 {% endblock %}
 
-{% block main %}
+{% block content %}
     <div>Hello</div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="text-start">Title</th>
+                <th class="text-end">Mood</th>
+                <th class="text-end">Entry</th>
+                <th class="text-end">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in entries %}
+            <tr>
+                <td class="text-start">{{ entry.title }}</td>
+                <td class="text-end">{{ entry.mood }}</td>
+                <td class="text-end">{{ entry.entry }}</td>
+                <td class="text-end">{{ entry.timestamp }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
