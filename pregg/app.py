@@ -161,14 +161,36 @@ def register():
 @login_required
 def submitentry():
     """Submit a journal entry"""
-    db.execute('''CREATE TABLE IF NOT EXISTS journal (id INTEGER, user_id INTEGER, title TEXT, mood TEXT, entry TEXT, timestamp DATETIME, PRIMARY KEY(id), FOREIGN KEY user_id REFERENCES users(id))''')
-    return render_template("submitentry.html")
+    if request.method == "POST":
+        # db.execute('''DROP TABLE journal''')
+        db.execute('''CREATE TABLE IF NOT EXISTS journal (id INTEGER, user_id INTEGER, title TEXT, mood TEXT, entry TEXT, timestamp DATETIME default(CURRENT_TIMESTAMP), PRIMARY KEY(id), FOREIGN KEY (user_id) REFERENCES users(id))''')
+
+        # Make sure entry is not blank
+        if not request.form.get("entry"):
+            return apology("entry cannot be blank", 400)
+        
+        title = request.form.get("title")
+        entry = request.form.get("entry")
+        mood = request.form.get("mood")
+        
+        # Insert user input into database
+        db.execute("INSERT INTO journal (user_id, title, entry, mood) VALUES (?, ?, ?, ?)", session["user_id"], title, entry, mood)
+
+        # Redirect user to home page
+        return redirect("/journal")
+    
+    # User reached route via GET 
+    else:
+        return render_template("submitentry.html")
 
 @app.route("/journal")
 @login_required
 def journal():
-    """Journal page for users"""
-    return render_template("journal.html")
+    """Show journal entries"""
+    # Select all of the entries of a user
+    entries = db.execute("SELECT * FROM journal WHERE user_id = ?", session["user_id"])
+
+    return render_template("journal.html", entries=entries)
 
 @app.route("/quiz")
 @login_required

@@ -1,9 +1,21 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block title %}
    Entry
 {% endblock %}
 
-{% block main %}
+{% block content %}
     <div>Submit journal entry</div>
+    <form action="/submitentry" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="title" name="title" placeholder="Title" type="text">
+        </div>
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="entry" name="entry" placeholder="Journal Entry" type="text">
+        </div>
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="mood" name="mood" placeholder="Mood" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">Save Entry</button>
+    </form>
 {% endblock %}
