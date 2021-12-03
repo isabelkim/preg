@@ -1,6 +1,7 @@
 import sqlite3
 import os
 
+# from cs50 import SQL
 from flask import Flask, jsonify, render_template, request, session, flash, redirect
 from flask_session import Session
 from tempfile import mkdtemp
@@ -25,7 +26,7 @@ con = sqlite3.connect('app.db')
 
 # Create datatables
 # https://docs.python.org/3/library/sqlite3.html
-con.execute('''CREATE TABLE IF NOT EXISTS users (id INTEGER, username TEXT, hash TEXT, PRIMARY KEY(id))''')
+con.execute("CREATE TABLE IF NOT EXISTS users (id INTEGER, username TEXT, hash TEXT, PRIMARY KEY(id))")
 
 # Initialize cursor 
 # cur = con.cursor()
@@ -181,3 +182,6 @@ def tracking():
 def about():
     """About us"""
     return render_template("about.html")
+
+# Quiz Implementation
+
