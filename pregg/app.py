@@ -123,13 +123,11 @@ def register():
 
         # Ensure user submitted a username (If field is left blank, render apology)
         if not request.form.get("username"):
-            return
-            # return apology("must provide username", 400)
+            return apology("must provide username", 400)
 
         # Ensure user submitted both password and confirmation (Render an apology if password or confirmation left blank) 
         if not request.form.get("password") or not request.form.get("confirmation"):
-            return
-            # return apology("must provide both password and confirmation", 400)
+            return apology("must provide both password and confirmation", 400)
 
         # Query database for username
         # rows = con.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
@@ -137,13 +135,12 @@ def register():
 
         # Ensure user submitted a username that does not already exist
         if len(rows) == 1:
-            return
+            return apology("must provide username that doesn't already exist", 400)
             # return apology("must provide username that doesn't already exist", 400)
 
         # Render an apology if passwords do not match
         if request.form.get("password") != request.form.get("confirmation"):
-            return
-            # return apology("password and confirmation must match", 400)
+            return apology("password and confirmation must match", 400)
 
         # Get data (username and password) that user inputted into registration form 
         username = request.form.get("username")
@@ -159,6 +156,13 @@ def register():
     # User reached route via GET 
     else:
         return render_template("register.html")
+
+@app.route("/submitentry", methods=["GET", "POST"])
+@login_required
+def submitentry():
+    """Submit a journal entry"""
+    db.execute('''CREATE TABLE IF NOT EXISTS journal (id INTEGER, user_id INTEGER, title TEXT, mood TEXT, entry TEXT, timestamp DATETIME, PRIMARY KEY(id), FOREIGN KEY user_id REFERENCES users(id))''')
+    return render_template("submitentry.html")
 
 @app.route("/journal")
 @login_required
