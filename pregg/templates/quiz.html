@@ -6,4 +6,32 @@
 
 {% block content %}
     <div>Hello</div>
+    <div class="header">
+        <h1>Trivia!</h1>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>Part 1: Multiple Choice </h2>
+            <hr>
+            <!-- Multiple choice question -->
+            <h3> How many legs does a dog have? </h3>
+            <button onclick="gryffindor(event)">One</button>
+            <button onclick="checkMC(event)">Two</button>
+            <button onclick="checkMC(event)">Three</button>
+            <button onclick="checkMC(event)">Four</button>
+            <p class="feedback"></p>
+            
+        </div>
+
+        <div class="section">
+            <h2>Part 2: Free Response</h2>
+            <hr>
+            <!-- Free response question -->
+            <h3>Who is the best kpop group</h3>
+            <input type="text"></input>
+            <button onclick="checkFR(event)">Check Answer</button>
+            <p class="feedback"></p>
+        </div>
+    </div>
 {% endblock %}
