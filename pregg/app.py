@@ -37,6 +37,7 @@ db = SQL("sqlite:///app.db")
 # db.execute("DROP TABLE users")
 db.execute('''CREATE TABLE IF NOT EXISTS users (id INTEGER, username TEXT, hash TEXT, PRIMARY KEY(id))''')
 db.execute('''CREATE TABLE IF NOT EXISTS date (id INTEGER, user_id INTEGER, month INT, day INT, year INT, PRIMARY KEY(id), FOREIGN KEY (user_id) REFERENCES users(id))''')
+db.execute('''CREATE TABLE IF NOT EXISTS journal (id INTEGER, user_id INTEGER, title TEXT, mood TEXT, entry TEXT, timestamp DATETIME default(CURRENT_TIMESTAMP), PRIMARY KEY(id), FOREIGN KEY (user_id) REFERENCES users(id))''')
 
 # Initialize cursor 
 # cur = con.cursor()
@@ -170,9 +171,6 @@ def register():
 def submitentry():
     """Submit a journal entry"""
     if request.method == "POST":
-        # db.execute('''DROP TABLE journal''')
-        db.execute('''CREATE TABLE IF NOT EXISTS journal (id INTEGER, user_id INTEGER, title TEXT, mood TEXT, entry TEXT, timestamp DATETIME default(CURRENT_TIMESTAMP), PRIMARY KEY(id), FOREIGN KEY (user_id) REFERENCES users(id))''')
-
         # Make sure entry is not blank
         if not request.form.get("entry"):
             return apology("entry cannot be blank", 400)
