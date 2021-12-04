@@ -1,5 +1,7 @@
 import sqlite3
 import os
+import datetime
+from datetime import date
 
 from cs50 import SQL
 from flask import Flask, jsonify, render_template, request, session, flash, redirect
@@ -30,7 +32,11 @@ db = SQL("sqlite:///app.db")
 # Create datatables
 # https://docs.python.org/3/library/sqlite3.html
 # con.execute('''CREATE TABLE IF NOT EXISTS users (id INTEGER, username TEXT, hash TEXT, PRIMARY KEY(id))''')
+# db.execute("DROP TABLE date")
+# db.execute("DROP TABLE date")
+# db.execute("DROP TABLE users")
 db.execute('''CREATE TABLE IF NOT EXISTS users (id INTEGER, username TEXT, hash TEXT, PRIMARY KEY(id))''')
+db.execute('''CREATE TABLE IF NOT EXISTS date (id INTEGER, user_id INTEGER, month INT, day INT, year INT, PRIMARY KEY(id), FOREIGN KEY (user_id) REFERENCES users(id))''')
 
 # Initialize cursor 
 # cur = con.cursor()
@@ -96,6 +102,11 @@ def login():
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
 
+        # Check that user hasn't logged in before then initialize conception date
+        rows2 = db.execute("SELECT * FROM date WHERE user_id = ?", session["user_id"])
+        if len(rows2) == 0:
+            db.execute("INSERT INTO date (user_id, month, day, year) VALUES (?, ?, ?, ?)", session["user_id"], 0, 0, 0)
+
         # Redirect user to home page
         return redirect("/")
 
@@ -145,7 +156,7 @@ def register():
 
         # Insert user input into database
         # con.execute("INSERT into users (username, hash) VALUES (?, ?)", username, passwordhash)
-        db.execute("INSERT into users (username, hash) VALUES (?, ?)", username, passwordhash)
+        db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", username, passwordhash)
 
         # Redirect user to homepage
         return redirect("/")
@@ -201,11 +212,49 @@ def ppd():
     """Info on postpartum depression"""
     return render_template("ppd.html")
 
+@app.route("/conception", methods=["GET", "POST"])
+@login_required
+def conception():
+    """Conception date"""
+    if request.method == "POST":
+        # Make sure month and day are not blank
+        if not request.form.get("month"):
+            return apology("entry cannot be blank", 400)
+        if not request.form.get("day"):
+            return apology("entry cannot be blank", 400)
+        if not request.form.get("year"):
+            return apology("entry cannot be blank", 400)
+        
+        month = int(request.form.get("month"))
+        day = int(request.form.get("day"))
+        year = int(request.form.get("year"))
+        
+        # Insert user input into database
+        db.execute("UPDATE date SET month = ?, day = ?, year = ? WHERE user_id = ?", month, day, year, session["user_id"])
+
+        # Redirect user to home page
+        return redirect("/tracking")
+    
+    # User reached route via GET 
+    else:
+        return render_template("conception.html")
+
 @app.route("/tracking")
 @login_required
 def tracking():
     """Allow users to track their pregnancy (prenatal development of the baby)"""
-    return render_template("tracking.html")
+    dt = datetime.datetime.today()
+    today_month = dt.month
+    today_day = dt.day
+    today_year = dt.year
+    month = db.execute("SELECT month FROM date WHERE user_id = ?", session["user_id"])[0]["month"]
+    day = db.execute("SELECT day FROM date WHERE user_id = ?", session["user_id"])[0]["day"]
+    year = db.execute("SELECT year FROM date WHERE user_id = ?", session["user_id"])[0]["year"]
+    today = date(today_year, today_month, today_day)
+    conception = date(year, month, day)
+    difference = today - conception
+    weeks = difference.days / 7
+    return render_template("tracking.html", weeks=weeks)
 
 @app.route("/about")
 @login_required
