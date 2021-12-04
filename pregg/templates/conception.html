@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Conception Date
+{% endblock %}
+
+{% block content %}
+    <div>Hello</div>
+    <form action="/conception" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="month" name="month" placeholder="month" type="number">
+        </div>
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="day" name="day" placeholder="day" type="number">
+        </div>
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="year" name="year" placeholder="year" type="number">
+        </div>
+        <button class="btn btn-primary" type="submit">Enter Date</button>
+    </form>
+{% endblock %}
