@@ -229,10 +229,10 @@ def conception():
         day = int(request.form.get("day"))
         year = int(request.form.get("year"))
         
-        # Insert user input into database
+        # Update conception date in database
         db.execute("UPDATE date SET month = ?, day = ?, year = ? WHERE user_id = ?", month, day, year, session["user_id"])
 
-        # Redirect user to home page
+        # Redirect user to tracking page
         return redirect("/tracking")
     
     # User reached route via GET 
@@ -244,16 +244,32 @@ def conception():
 def tracking():
     """Allow users to track their pregnancy (prenatal development of the baby)"""
     dt = datetime.datetime.today()
-    today_month = dt.month
-    today_day = dt.day
-    today_year = dt.year
+    today = date(dt.year, dt.month, dt.day)
+    
+    # Date of conception
     month = db.execute("SELECT month FROM date WHERE user_id = ?", session["user_id"])[0]["month"]
     day = db.execute("SELECT day FROM date WHERE user_id = ?", session["user_id"])[0]["day"]
     year = db.execute("SELECT year FROM date WHERE user_id = ?", session["user_id"])[0]["year"]
-    today = date(today_year, today_month, today_day)
+
+    # Make sure that user entered a conception date
+    if month == 0 or day == 0 or year == 0:
+        return apology("Please enter your conception date on the conception page", 400)
+    
+    # Make sure that user entered a valid conception date
+    if not (month >= 1 and month <= 12 and day >= 1 and day <= 31 and year >= 1):
+        return apology("Please enter a valid conception date on the conception page", 400)
+
     conception = date(year, month, day)
+
+    # Calculate how many days it has been since conception
     difference = today - conception
+    
     weeks = difference.days / 7
+
+    # Make sure conception date is before today
+    if not (weeks >= 0):
+        return apology("Conception date must be earlier than today's date", 400)
+
     return render_template("tracking.html", weeks=weeks)
 
 @app.route("/about")
