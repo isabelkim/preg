@@ -6,16 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </head>
 
 <body>
-    {% block content%}
-    {% endblock %}
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-    </script>
-
     <nav class="bg-light border navbar navbar-expand-md navbar-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="/"><span class="red">PREG</span></a>
@@ -44,6 +37,12 @@
             </div>
         </div>
     </nav>
+
+    {% block content%}{% endblock %}
+
+    {% block js %}{% endblock %}
+
+
     
 </body>
 
