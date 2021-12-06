@@ -1,11 +1,46 @@
 /* Used CSS from https://codepen.io/tgallimore/pen/xwGOXB */
 
+nav { 
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 25px;
+}
+
+.navbar-brand { 
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 45px;
+}
+
 body {
   /* text-align: center; */
   margin:0;
   padding:20px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  background-color: #F9E5F5;
 }
-.quiz {
+
+/* PPD Page Styling */
+.general { 
+  margin: 25px;
+  padding: 20px; 
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.resources { 
+  margin: 25px;
+  padding: 20px; 
+  padding-left: 100px;
+  padding-right: 100px;
+  font-size: 22px;
+}
+
+h2 { 
+  text-align: center;
+  font-size: 35px;
+}
+
+/* .quiz {
   padding:0 30px 20px 30px;
   max-width:960px;
   margin:0 auto;
@@ -35,18 +70,6 @@ body {
   vertical-align:middle;
   margin-right:10px;
 }
-.quiz-answer > active > before {
-  background-color:#333;
-  border-color:#333;
-}
-.quiz-answer > correct > before {
-  background-color:green;
-  border-color:green;
-}
-.quiz-answer > active.correct > before {
-  outline: 2px solid green;
-  outline-offset: 2px;
-}
 
 .quiz-result {
   max-width:960px;
@@ -55,13 +78,36 @@ body {
   text-align:center;
   color: #fff;
   padding:20px;
+} */
+
+/* Quiz Page Styling */
+.section { 
+  padding: 20px;
+
 }
-.quiz-result > good {
-  background: green;
+
+#result { 
+  margin: 10px;
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
 }
-.quiz-result > mid {
-  background: orange;
+
+h1 { 
+  margin: 10px;
+  padding: 20px;
+  text-align: center;
 }
-.quiz-result > bad {
-  background: red;
+
+button { 
+  background-color: cornsilk;
+  border-color: lightsteelblue;
+  border-radius: 10px;
+  padding: 10px;
+
+}
+
+.quizquestions { 
+  margin: 10px;
+  padding: 20px;
 }
