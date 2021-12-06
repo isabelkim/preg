@@ -8,28 +8,28 @@ let result = document.getElementById("result");
 
 function gryffindor(event) {
     let button = event.target;
-    button.style.backgroundColor = 'lightblue';
+    button.style.backgroundColor = 'lightsteelblue';
     g += 1;
     count += 1;
 }
 
 function hufflepuff(event) {
     let button = event.target;
-    button.style.backgroundColor = 'lightblue';
+    button.style.backgroundColor = 'lightsteelblue';
     h += 1;
     count += 1;
 }
 
 function ravenclaw(event) {
     let button = event.target;
-    button.style.backgroundColor = 'lightblue';
+    button.style.backgroundColor = 'lightsteelblue';
     r += 1;
     count += 1;
 }
 
 function slytherin(event) {
     let button = event.target;
-    button.style.backgroundColor = 'lightblue';
+    button.style.backgroundColor = 'lightsteelblue';
     s += 1;
     count += 1;
 }

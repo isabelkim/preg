@@ -3,11 +3,17 @@
 nav { 
   font-family: 'Cormorant Garamond', serif;
   font-size: 25px;
+  border-radius: 7px;
 }
 
 .navbar-brand { 
   font-family: 'Cormorant Garamond', serif;
   font-size: 45px;
+}
+
+.nav-item:hover { 
+  background-color: lightsteelblue;
+  border-radius: 7px;
 }
 
 body {
@@ -19,10 +25,55 @@ body {
   background-color: #F9E5F5;
 }
 
+form { 
+  text-align: center;
+  margin: 20px;
+  padding: 20px;
+}
+
+.submit{ 
+  background-color: cornflowerblue;
+  color: white;
+  border: white; 
+  border-radius: 5px;
+  padding-left: 15px; 
+  padding-right: 15px; 
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 18px;
+}
+
+.entryintro { 
+  font-size: 25px;
+  text-align: center;
+  margin: 25px;
+  padding-top: 30px; 
+  padding-left: 20px; 
+  padding-right: 20px; 
+}
+
+.conceptionintro { 
+  font-size: 25px;
+  text-align: center;
+  margin: 25px;
+  padding-top: 30px; 
+  padding-left: 20px; 
+  padding-right: 20px; 
+}
+/* Tracking Page Styling */
+.month { 
+  font-size: 25px;
+  text-align: center;
+  margin: 25px;
+  padding-top: 30px; 
+  padding-left: 20px; 
+  padding-right: 20px; 
+}
+
 /* PPD Page Styling */
 .general { 
   margin: 25px;
-  padding: 20px; 
+  padding: 10px; 
   padding-left: 100px;
   padding-right: 100px;
 }
@@ -40,46 +91,6 @@ h2 {
   font-size: 35px;
 }
 
-/* .quiz {
-  padding:0 30px 20px 30px;
-  max-width:960px;
-  margin:0 auto;
-}
-.quiz > ul {
-  list-style:none;
-  padding: 0;
-  margin:0;
-}
-.quiz-answer {
-  margin:0;
-  padding:10px;
-  background:#f7f7f7;
-  margin-bottom:5px;
-  cursor: pointer;
-}
-.quiz-answer > hover {
-  background:#eee;
-}
-.quiz-answer > before {
-  content:"";
-  display:inline-block;
-  width:15px;
-  height:15px;
-  border:1px solid #ccc;
-  background:#fff;
-  vertical-align:middle;
-  margin-right:10px;
-}
-
-.quiz-result {
-  max-width:960px;
-  margin:0 auto;
-  font-weight:bold;
-  text-align:center;
-  color: #fff;
-  padding:20px;
-} */
-
 /* Quiz Page Styling */
 .section { 
   padding: 20px;
@@ -96,15 +107,15 @@ h2 {
 h1 { 
   margin: 10px;
   padding: 20px;
+  font-size: 30px;
   text-align: center;
 }
 
-button { 
+.qbuttons { 
   background-color: cornsilk;
   border-color: lightsteelblue;
   border-radius: 10px;
   padding: 10px;
-
 }
 
 .quizquestions { 
