@@ -1,4 +1,5 @@
-// Check answers to questions
+// Initalize counters for Gryffindor, Hufflepuff, Ravenclaw, Slytherin, and for # of questions answered so far 
+// Each answer choice to a question is associated with one of the 4 houses  
 let g = 0;
 let h = 0;
 let r = 0;
@@ -6,6 +7,7 @@ let s = 0;
 let count = 0;
 let result = document.getElementById("result");
 
+// Once the user clicks on an answer choice, increment house counter (g, h, r, or s) and question count (count)
 function gryffindor(event) {
     let button = event.target;
     button.style.backgroundColor = 'lightsteelblue';
@@ -34,6 +36,8 @@ function slytherin(event) {
     count += 1;
 }
 
+// Once the user clicks on an answer choice, disable all other answer choices
+// If all 5 questions have been answered, call updateResult() to render final result to user 
 function button1(){
     document.querySelectorAll('.button1').forEach(el => el.setAttribute('disabled', true)); 
     if (count >= 5)
@@ -74,6 +78,7 @@ function button5(){
     }
 }
 
+// If more than half of the user's answer choices are associated with a particular house, show result description specific to that house
 function updateResult(){
     if (g >= 2){
         result.innerHTML = "Your baby will be a... Gryffindor! They will be brave, stand up for their friends, and always stick to what they think is right.";
