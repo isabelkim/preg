@@ -122,3 +122,24 @@ h1 {
   margin: 10px;
   padding: 20px;
 }
+
+.indexintro { 
+  margin: 10px;
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.welcome { 
+  margin: 40px;
+  padding: 40x;
+  font-size: 65px;
+  text-align: center;
+}
+
+.apologyimage {
+  margin: auto;
+  padding-left: 100px;
+  padding-top: 50px;
+  width: 50%;
+}

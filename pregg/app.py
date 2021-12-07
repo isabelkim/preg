@@ -160,7 +160,7 @@ def register():
         db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", username, passwordhash)
 
         # Redirect user to homepage
-        return redirect("/")
+        return redirect("/login")
 
     # User reached route via GET 
     else:
