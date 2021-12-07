@@ -1,21 +1,21 @@
 {% extends "base.html" %}
 
 {% block title %}
-    Conception Date
+    Preg: Submit Conception Date
 {% endblock %}
 
 {% block content %}
-    <div>Hello</div>
+    <p class = conceptionintro><em>When did you conceive your baby? Give your best estimate!</em></p>
     <form action="/conception" method="post">
         <div class="mb-3">
-            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="month" name="month" placeholder="month" type="number">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="month" name="month" placeholder="Month" type="number">
         </div>
         <div class="mb-3">
-            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="day" name="day" placeholder="day" type="number">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="day" name="day" placeholder="Day" type="number">
         </div>
         <div class="mb-3">
-            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="year" name="year" placeholder="year" type="number">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="year" name="year" placeholder="Year" type="number">
         </div>
-        <button class="btn btn-primary" type="submit">Enter Date</button>
+        <button class="submit" type="submit">Enter Date</button>
     </form>
 {% endblock %}

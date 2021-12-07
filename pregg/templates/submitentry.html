@@ -1,21 +1,21 @@
 {% extends "base.html" %}
 
 {% block title %}
-   Entry
+   Preg: Submit Journal Entry
 {% endblock %}
 
 {% block content %}
-    <div>Submit journal entry</div>
+    <p class = entryintro><em>What's on your mind? How are you feeling today? What do you want to remember about your pregnancy journey?</em></p>
     <form action="/submitentry" method="post">
         <div class="mb-3">
-            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="title" name="title" placeholder="Title" type="text">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="title" name="title" placeholder="Title Your Entry" type="text" size="100">
         </div>
         <div class="mb-3">
-            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="entry" name="entry" placeholder="Journal Entry" type="text">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="entry" name="entry" placeholder="Type Your Entry Here" type="text" size="100">
         </div>
         <div class="mb-3">
-            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="mood" name="mood" placeholder="Mood" type="text">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="mood" name="mood" placeholder="Mood" type="text" size="100">
         </div>
-        <button class="btn btn-primary" type="submit">Save Entry</button>
+        <button class="submit" type="submit">Save Entry</button>
     </form>
 {% endblock %}

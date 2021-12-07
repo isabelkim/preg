@@ -1,67 +1,145 @@
 /* Used CSS from https://codepen.io/tgallimore/pen/xwGOXB */
 
+nav { 
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 25px;
+  border-radius: 7px;
+}
+
+.navbar-brand { 
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 45px;
+}
+
+.nav-item:hover { 
+  background-color: lightsteelblue;
+  border-radius: 7px;
+}
+
 body {
   /* text-align: center; */
   margin:0;
   padding:20px;
-}
-.quiz {
-  padding:0 30px 20px 30px;
-  max-width:960px;
-  margin:0 auto;
-}
-.quiz > ul {
-  list-style:none;
-  padding: 0;
-  margin:0;
-}
-.quiz-answer {
-  margin:0;
-  padding:10px;
-  background:#f7f7f7;
-  margin-bottom:5px;
-  cursor: pointer;
-}
-.quiz-answer > hover {
-  background:#eee;
-}
-.quiz-answer > before {
-  content:"";
-  display:inline-block;
-  width:15px;
-  height:15px;
-  border:1px solid #ccc;
-  background:#fff;
-  vertical-align:middle;
-  margin-right:10px;
-}
-.quiz-answer > active > before {
-  background-color:#333;
-  border-color:#333;
-}
-.quiz-answer > correct > before {
-  background-color:green;
-  border-color:green;
-}
-.quiz-answer > active.correct > before {
-  outline: 2px solid green;
-  outline-offset: 2px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  background-color: #F9E5F5;
 }
 
-.quiz-result {
-  max-width:960px;
-  margin:0 auto;
-  font-weight:bold;
-  text-align:center;
-  color: #fff;
-  padding:20px;
+form { 
+  text-align: center;
+  margin: 20px;
+  padding: 20px;
 }
-.quiz-result > good {
-  background: green;
+
+.submit{ 
+  background-color: cornflowerblue;
+  color: white;
+  border: white; 
+  border-radius: 5px;
+  padding-left: 15px; 
+  padding-right: 15px; 
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 18px;
 }
-.quiz-result > mid {
-  background: orange;
+
+.entryintro { 
+  font-size: 25px;
+  text-align: center;
+  margin: 25px;
+  padding-top: 30px; 
+  padding-left: 20px; 
+  padding-right: 20px; 
 }
-.quiz-result > bad {
-  background: red;
+
+.conceptionintro { 
+  font-size: 25px;
+  text-align: center;
+  margin: 25px;
+  padding-top: 30px; 
+  padding-left: 20px; 
+  padding-right: 20px; 
+}
+/* Tracking Page Styling */
+.month { 
+  font-size: 25px;
+  text-align: center;
+  margin: 25px;
+  padding-top: 30px; 
+  padding-left: 20px; 
+  padding-right: 20px; 
+}
+
+/* PPD Page Styling */
+.general { 
+  margin: 25px;
+  padding: 10px; 
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.resources { 
+  margin: 25px;
+  padding: 20px; 
+  padding-left: 100px;
+  padding-right: 100px;
+  font-size: 22px;
+}
+
+h2 { 
+  text-align: center;
+  font-size: 35px;
+}
+
+/* Quiz Page Styling */
+.section { 
+  padding: 20px;
+
+}
+
+#result { 
+  margin: 10px;
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+
+h1 { 
+  margin: 10px;
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.qbuttons { 
+  background-color: cornsilk;
+  border-color: lightsteelblue;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.quizquestions { 
+  margin: 10px;
+  padding: 20px;
+}
+
+.indexintro { 
+  margin: 10px;
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.welcome { 
+  margin: 40px;
+  padding: 40x;
+  font-size: 65px;
+  text-align: center;
+}
+
+.apologyimage {
+  margin: auto;
+  padding-left: 100px;
+  padding-top: 50px;
+  width: 50%;
 }

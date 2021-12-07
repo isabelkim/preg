@@ -8,28 +8,28 @@ let result = document.getElementById("result");
 
 function gryffindor(event) {
     let button = event.target;
-    button.style.backgroundColor = 'Green';
+    button.style.backgroundColor = 'lightsteelblue';
     g += 1;
     count += 1;
 }
 
 function hufflepuff(event) {
     let button = event.target;
-    button.style.backgroundColor = 'Green';
+    button.style.backgroundColor = 'lightsteelblue';
     h += 1;
     count += 1;
 }
 
 function ravenclaw(event) {
     let button = event.target;
-    button.style.backgroundColor = 'Green';
+    button.style.backgroundColor = 'lightsteelblue';
     r += 1;
     count += 1;
 }
 
 function slytherin(event) {
     let button = event.target;
-    button.style.backgroundColor = 'Green';
+    button.style.backgroundColor = 'lightsteelblue';
     s += 1;
     count += 1;
 }
@@ -79,12 +79,12 @@ function updateResult(){
         result.innerHTML = "Your baby will be a... Gryffindor! They will be brave, stand up for their friends, and always stick to what they think is right.";
     }
     else if (h >= 2){
-        result.innerHTML = "Your baby will be a... Hufflepuff! They will be a caring friend, good listener, and always see the good in people.";
+        result.innerHTML = "Your baby will be a... Hufflepuff! They will be a caring friend, a good listener, and always see the good in people.";
     }
     else if (r >= 2){
-        result.innerHTML = "Your baby will be a... Ravenclaw! They will be studious, good at reading the situation, and have a good solution to problems.";
+        result.innerHTML = "Your baby will be a... Ravenclaw! They will be studious, good at reading the situation, and always have good solutions to problems.";
     }
     else if (s >= 2){
-        result.innerHTML = "Your baby will be a Slytherin! They will be opportunistic, crafty, and maybe have green as a favorite color.";
+        result.innerHTML = "Your baby will be a Slytherin! They will be opportunistic, crafty, and maybe have green as their favorite color.";
     }
 }

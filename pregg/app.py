@@ -160,7 +160,7 @@ def register():
         db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", username, passwordhash)
 
         # Redirect user to homepage
-        return redirect("/")
+        return redirect("/login")
 
     # User reached route via GET 
     else:
@@ -267,11 +267,4 @@ def tracking():
     # Make sure conception date is before today
     if not (weeks >= 0):
         return apology("Conception date must be earlier than today's date", 400)
-
     return render_template("tracking.html", weeks=weeks)
-
-@app.route("/about")
-@login_required
-def about():
-    """About us"""
-    return render_template("about.html")

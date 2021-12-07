@@ -1,55 +1,53 @@
 {% extends 'base.html' %}
 
 {% block title %}
-   Quiz
+   Preg: A Fun Quiz
 {% endblock %}
 
 {% block content %}
-    <div class="header">
-        <h1>Take a fun quiz!</h1>
-    </div>
 
     <div class="container">
         <div class="section">
-            <h2>Curate your perfect Annenberg and we’ll tell you which Harry Potter house your baby will be sorted into! </h2>
+            <h1><b>Curate a meal at Annenberg and we’ll tell you which Hogwarts house your baby will be sorted into!</b></h1>
             <hr>
+            <div class="quizquestions">
+                <h3> 1. First, choose a drink: </h3>
+                <button class="button1 qbuttons" onclick="ravenclaw(event);button1(event)">water</button>
+                <button class="button1 qbuttons" onclick="hufflepuff(event);button1(event)">chocolate milk</button>
+                <button class="button1 qbuttons" onclick="gryffindor(event);button1(event)">orange juice</button>
+                <button class="button1 qbuttons" onclick="slytherin(event);button1(event)">coffee</button>
+                <p class="feedback"></p>
+                
+                <h3> 2. Choose a soup: </h3>
+                <button class="button2 qbuttons" onclick="gryffindor(event);button2(event)">New England clam chowder</button>
+                <button class="button2 qbuttons" onclick="hufflepuff(event);button2(event)">tomato basil</button>
+                <button class="button2 qbuttons" onclick="slytherin(event);button2(event)">chicken noodle</button>
+                <button class="button2 qbuttons" onclick="ravenclaw(event);button2(event)">broccoli cheddar</button>
+                <p class="feedback"></p>
 
-            <h3> First, choose a drink: </h3>
-            <button class="button1" onclick="ravenclaw(event);button1(event)">water</button>
-            <button class="button1" onclick="hufflepuff(event);button1(event)">chocolate milk</button>
-            <button class="button1" onclick="gryffindor(event);button1(event)">orange juice</button>
-            <button class="button1" onclick="slytherin(event);button1(event)">coffee</button>
-            <p class="feedback"></p>
-            
-            <h3> Choose a soup! </h3>
-            <button class="button2" onclick="gryffindor(event);button2(event)">New England clam chowder</button>
-            <button class="button2" onclick="hufflepuff(event);button2(event)">tomato basil</button>
-            <button class="button2" onclick="slytherin(event);button2(event)">chicken noodle</button>
-            <button class="button2" onclick="ravenclaw(event);button2(event)">broccoli cheddar</button>
-            <p class="feedback"></p>
+                <h3> 3. Choose an entreé: </h3>
+                <button class="button3 qbuttons" onclick="slytherin(event);button3(event)">General Gao’s chicken</button>
+                <button class="button3 qbuttons" onclick="gryffindor(event);button3(event)">butter chicken</button>
+                <button class="button3 qbuttons" onclick="ravenclaw(event);button3(event)">popcorn shrimp</button>
+                <button class="button3 qbuttons" onclick="hufflepuff(event);button3(event)">pad thai</button>
+                <p class="feedback"></p>
 
-            <h3> Choose an entreé </h3>
-            <button class="button3" onclick="slytherin(event);button3(event)">General Gao’s chicken</button>
-            <button class="button3" onclick="gryffindor(event);button3(event)">butter chicken</button>
-            <button class="button3" onclick="ravenclaw(event);button3(event)">popcorn shrimp</button>
-            <button class="button3" onclick="hufflepuff(event);button3(event)">pad thai</button>
-            <p class="feedback"></p>
+                <h3> 4. Choose a dessert: </h3>
+                <button class="button4 qbuttons" onclick="slytherin(event);button4(event)">chocolate chip cookies</button>
+                <button class="button4 qbuttons" onclick="ravenclaw(event);button4(event)">ricotta squares</button>
+                <button class="button4 qbuttons" onclick="gryffindor(event);button4(event)">lemon squares</button>
+                <button class="button4 qbuttons" onclick="hufflepuff(event);button4(event)">coconut rice pudding with mango</button>
+                <p class="feedback"></p>
 
-            <h3> Choose a dessert </h3>
-            <button class="button4" onclick="slytherin(event);button4(event)">chocolate chip cookies</button>
-            <button class="button4" onclick="ravenclaw(event);button4(event)">ricotta squares</button>
-            <button class="button4" onclick="gryffindor(event);button4(event)">lemon squares</button>
-            <button class="button4" onclick="hufflepuff(event);button4(event)">coconut rice pudding with mango</button>
-            <p class="feedback"></p>
-
-            <h3> Take a fruit to-go! </h3>
-            <button class="button5" onclick="slytherin(event);button5(event)">banana with a hint of green</button>
-            <button class="button5" onclick="gryffindor(event);button5(event)">yellow banana</button>
-            <button class="button5" onclick="hufflepuff(event);button5(event)">dotted banana</button>
-            <button class="button5" onclick="ravenclaw(event);button5(event)">apple</button>
-            <p class="feedback"></p>
-
-            <p id="result">Your result is...</p>
+                <h3> 5. Take a fruit to-go: </h3>
+                <button class="button5 qbuttons" onclick="slytherin(event);button5(event)"> green-ish banana</button>
+                <button class="button5 qbuttons" onclick="gryffindor(event);button5(event)">yellow banana</button>
+                <button class="button5 qbuttons" onclick="hufflepuff(event);button5(event)">heavily-dotted banana</button>
+                <button class="button5 qbuttons" onclick="ravenclaw(event);button5(event)">apple</button>
+                <p class="feedback"></p>
+            </div>
+            <hr>
+            <p id="result"><b>Your baby will be a...</b></p>
         </div>
 
     </div>
