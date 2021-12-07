@@ -21,11 +21,6 @@ Session(app)
 app.config.from_object(Config)
 
 
-# DATABASE
-
-# Connect database (create a Connection object that represents the database)
-# con = sqlite3.connect('app.db')
-
 # Database using CS50
 db = SQL("sqlite:///app.db")
 
@@ -35,15 +30,13 @@ db = SQL("sqlite:///app.db")
 # db.execute("DROP TABLE date")
 # db.execute("DROP TABLE date")
 # db.execute("DROP TABLE users")
+
+# Create users table to store user's login information
 db.execute('''CREATE TABLE IF NOT EXISTS users (id INTEGER, username TEXT, hash TEXT, PRIMARY KEY(id))''')
+# Create date table to store user's conception date 
 db.execute('''CREATE TABLE IF NOT EXISTS date (id INTEGER, user_id INTEGER, month INT, day INT, year INT, PRIMARY KEY(id), FOREIGN KEY (user_id) REFERENCES users(id))''')
+# Create date table to store user's journal entries 
 db.execute('''CREATE TABLE IF NOT EXISTS journal (id INTEGER, user_id INTEGER, title TEXT, mood TEXT, entry TEXT, timestamp DATETIME default(CURRENT_TIMESTAMP), PRIMARY KEY(id), FOREIGN KEY (user_id) REFERENCES users(id))''')
-
-# Initialize cursor 
-# cur = con.cursor()
-
-# Save (commit) the changes
-# con.commit()
 
 
 @app.route("/", methods=["GET", 'POST'])
@@ -55,21 +48,6 @@ def home():
         message = request.form['message']
         return jsonify(your_message=message)
     return render_template("index.html")
-
-@app.route("/hello", methods=["GET"])
-def hello():
-    """
-    Hello route
-    """
-    return 'hello'
-
-@app.route('/message', methods=['POST'])
-def message():
-    """
-    Message route
-    """
-    message = request.json.get("message")
-    return jsonify(your_message=message)
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0")
@@ -93,7 +71,6 @@ def login():
             return apology("must provide password", 403)
 
         # Query database for username
-        # rows = con.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
         rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
 
         # Ensure username exists and password is correct
@@ -139,13 +116,11 @@ def register():
             return apology("must provide both password and confirmation", 400)
 
         # Query database for username
-        # rows = con.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
         rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
 
         # Ensure user submitted a username that does not already exist
         if len(rows) == 1:
             return apology("must provide username that doesn't already exist", 400)
-            # return apology("must provide username that doesn't already exist", 400)
 
         # Render an apology if passwords do not match
         if request.form.get("password") != request.form.get("confirmation"):
@@ -156,10 +131,9 @@ def register():
         passwordhash = generate_password_hash(request.form.get("password"))
 
         # Insert user input into database
-        # con.execute("INSERT into users (username, hash) VALUES (?, ?)", username, passwordhash)
         db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", username, passwordhash)
 
-        # Redirect user to homepage
+        # Redirect user to login page
         return redirect("/login")
 
     # User reached route via GET 
@@ -171,9 +145,13 @@ def register():
 def submitentry():
     """Submit a journal entry"""
     if request.method == "POST":
-        # Make sure entry is not blank
+        # Make sure inputs are not blank
+        if not request.form.get("title"):
+            return apology("title cannot be blank", 400)
         if not request.form.get("entry"):
             return apology("entry cannot be blank", 400)
+        if not request.form.get("mood"):
+            return apology("mood cannot be blank", 400)
         
         title = request.form.get("title")
         entry = request.form.get("entry")
@@ -262,6 +240,7 @@ def tracking():
     # Calculate how many days it has been since conception
     difference = today - conception
     
+    # Calculate the number of weeks
     weeks = difference.days / 7
 
     # Make sure conception date is before today
