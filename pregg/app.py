@@ -25,11 +25,6 @@ app.config.from_object(Config)
 db = SQL("sqlite:///app.db")
 
 # Create datatables
-# https://docs.python.org/3/library/sqlite3.html
-# con.execute('''CREATE TABLE IF NOT EXISTS users (id INTEGER, username TEXT, hash TEXT, PRIMARY KEY(id))''')
-# db.execute("DROP TABLE date")
-# db.execute("DROP TABLE date")
-# db.execute("DROP TABLE users")
 
 # Create users table to store user's login information
 db.execute('''CREATE TABLE IF NOT EXISTS users (id INTEGER, username TEXT, hash TEXT, PRIMARY KEY(id))''')
@@ -80,7 +75,7 @@ def login():
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
 
-        # Check that user hasn't logged in before then initialize conception date
+        # Check that user hasn't logged in before they initialize conception date
         rows2 = db.execute("SELECT * FROM date WHERE user_id = ?", session["user_id"])
         if len(rows2) == 0:
             db.execute("INSERT INTO date (user_id, month, day, year) VALUES (?, ?, ?, ?)", session["user_id"], 0, 0, 0)
@@ -145,11 +140,14 @@ def register():
 def submitentry():
     """Submit a journal entry"""
     if request.method == "POST":
+
         # Make sure inputs are not blank
         if not request.form.get("title"):
             return apology("title cannot be blank", 400)
+
         if not request.form.get("entry"):
             return apology("entry cannot be blank", 400)
+
         if not request.form.get("mood"):
             return apology("mood cannot be blank", 400)
         
@@ -193,11 +191,14 @@ def ppd():
 def conception():
     """Conception date"""
     if request.method == "POST":
-        # Make sure month and day are not blank
+        
+        # Make sure conception date form is not blank
         if not request.form.get("month"):
             return apology("entry cannot be blank", 400)
+
         if not request.form.get("day"):
             return apology("entry cannot be blank", 400)
+
         if not request.form.get("year"):
             return apology("entry cannot be blank", 400)
         
@@ -205,7 +206,7 @@ def conception():
         day = int(request.form.get("day"))
         year = int(request.form.get("year"))
         
-        # Update conception date in database
+        # Update user's conception date in database
         db.execute("UPDATE date SET month = ?, day = ?, year = ? WHERE user_id = ?", month, day, year, session["user_id"])
 
         # Redirect user to tracking page
