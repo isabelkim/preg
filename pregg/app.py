@@ -4,7 +4,7 @@ import datetime
 from datetime import date
 
 from cs50 import SQL
-from flask import Flask, jsonify, render_template, request, session, flash, redirect
+from flask import Flask, jsonify, render_template, request, session, redirect
 from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
@@ -23,13 +23,6 @@ app.config.from_object(Config)
 
 # Database using CS50
 db = SQL("sqlite:///app.db")
-
-# Create datatables
-# https://docs.python.org/3/library/sqlite3.html
-# con.execute('''CREATE TABLE IF NOT EXISTS users (id INTEGER, username TEXT, hash TEXT, PRIMARY KEY(id))''')
-# db.execute("DROP TABLE date")
-# db.execute("DROP TABLE date")
-# db.execute("DROP TABLE users")
 
 # Create users table to store user's login information
 db.execute('''CREATE TABLE IF NOT EXISTS users (id INTEGER, username TEXT, hash TEXT, PRIMARY KEY(id))''')
@@ -80,7 +73,7 @@ def login():
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
 
-        # Check that user hasn't logged in before then initialize conception date
+        # Check that user hasn't logged in before they initialize conception date
         rows2 = db.execute("SELECT * FROM date WHERE user_id = ?", session["user_id"])
         if len(rows2) == 0:
             db.execute("INSERT INTO date (user_id, month, day, year) VALUES (?, ?, ?, ?)", session["user_id"], 0, 0, 0)
@@ -193,7 +186,7 @@ def ppd():
 def conception():
     """Conception date"""
     if request.method == "POST":
-        # Make sure month and day are not blank
+        # Make sure month, day, and year are not blank
         if not request.form.get("month"):
             return apology("entry cannot be blank", 400)
         if not request.form.get("day"):
@@ -205,7 +198,7 @@ def conception():
         day = int(request.form.get("day"))
         year = int(request.form.get("year"))
         
-        # Update conception date in database
+        # Update user's conception date in database
         db.execute("UPDATE date SET month = ?, day = ?, year = ? WHERE user_id = ?", month, day, year, session["user_id"])
 
         # Redirect user to tracking page
